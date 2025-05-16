@@ -231,7 +231,7 @@
                             <div class="w-5 h-5 flex items-center justify-center">
                                 <i class="ri-time-line"></i>
                             </div>
-                            <span id="time-remaining">Time Remaining: 04:30</span>
+                            <span id="time-remaining">Time Remaining: 15:00</span>
                         </div>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg mb-6" id="question-container">
@@ -322,8 +322,7 @@
             </div>
             <div class="image-gallery">
                 <h3 class="text-lg font-medium text-white mb-4">Captured Images</h3>
-                <div id="image-container" class="flex flex-wrap">
-                </div>
+                <div id="image-container" class="flex flex-wrap"></div>
             </div>
         </div>
     </div>
@@ -389,6 +388,8 @@
 
             let currentQuestionIndex = 0;
             let answers = {};
+            let timeRemaining = 900; 
+            let timerInterval = null;
 
             const totalQuestions = questions.length;
             const questionText = document.getElementById('question-text');
@@ -404,7 +405,34 @@
             const previousButton = document.getElementById('previous-button');
             const nextButton = document.getElementById('next-button');
             const submitButton = document.getElementById('submit-button');
+            const timeRemainingElement = document.getElementById('time-remaining');
             const questionNavButtons = document.getElementById('question-nav-buttons').children;
+
+            function startTimer() {
+                timerInterval = setInterval(() => {
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        alert('Time is up! Your answers have been submitted.');
+                        submitAnswers();
+                        return;
+                    }
+                    timeRemaining--;
+                    updateTimerDisplay();
+                }, 1000);
+            }
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timeRemainingElement.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            function submitAnswers() {
+                saveAnswer();
+                alert('Test submitted! Your answers have been recorded.');
+                console.log('Submitted answers:', answers);
+                clearInterval(timerInterval);
+            }
 
             function renderQuestion() {
                 const question = questions[currentQuestionIndex];
@@ -474,11 +502,7 @@
                 }
             });
 
-            submitButton.addEventListener('click', () => {
-                saveAnswer();
-                alert('Test submitted! Your answers have been recorded.');
-                console.log('Submitted answers:', answers);
-            });
+            submitButton.addEventListener('click', submitAnswers);
 
             const videoElement = document.getElementById('video-stream');
             const startCameraButton = document.getElementById('start-camera');
@@ -543,6 +567,7 @@
                 imageContainer.appendChild(img);
             }
 
+            startTimer();
             renderQuestion();
         });
     </script>
