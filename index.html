@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,14 +32,19 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Tajawal:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
-        :where([class^="ri-"])::before { content: "\f3c2"; }
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: #f9fafb;
         }
+
         input[type="radio"] {
             appearance: none;
             width: 1.25rem;
@@ -49,9 +55,11 @@
             margin-left: 0.5rem;
             cursor: pointer;
         }
+
         input[type="radio"]:checked {
             border-color: #4f46e5;
         }
+
         input[type="radio"]:checked::after {
             content: "";
             position: absolute;
@@ -63,6 +71,7 @@
             background-color: #4f46e5;
             border-radius: 50%;
         }
+
         input[type="checkbox"] {
             appearance: none;
             width: 1.25rem;
@@ -73,10 +82,12 @@
             margin-left: 0.5rem;
             cursor: pointer;
         }
+
         input[type="checkbox"]:checked {
             background-color: #4f46e5;
             border-color: #4f46e5;
         }
+
         input[type="checkbox"]:checked::after {
             content: "";
             position: absolute;
@@ -88,17 +99,20 @@
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
         }
+
         .switch {
             position: relative;
             display: inline-block;
             width: 3rem;
             height: 1.5rem;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -110,6 +124,18 @@
             transition: .4s;
             border-radius: 34px;
         }
+
+        .camera-container {
+            height: 700px !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            border-radius: 20px;
+            margin-right: 25px;
+        }
+
         .slider:before {
             position: absolute;
             content: "";
@@ -121,22 +147,27 @@
             transition: .4s;
             border-radius: 50%;
         }
-        input:checked + .slider {
+
+        input:checked+.slider {
             background-color: #4f46e5;
         }
-        input:checked + .slider:before {
+
+        input:checked+.slider:before {
             transform: translateX(-1.5rem);
         }
+
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
+
         .camera-container {
             position: relative;
             overflow: hidden;
             background-color: #111827;
         }
+
         .camera-placeholder {
             position: relative;
             width: 100%;
@@ -147,6 +178,7 @@
             flex-direction: column;
             color: #9ca3af;
         }
+
         .camera-controls {
             position: absolute;
             bottom: 1rem;
@@ -157,30 +189,29 @@
             gap: 1rem;
             z-index: 10;
         }
+
         .camera-status {
             position: absolute;
             top: 1rem;
             left: 1rem;
             z-index: 10;
         }
+
         .progress-bar {
             height: 0.5rem;
             background-color: #e5e7eb;
             border-radius: 9999px;
             overflow: hidden;
         }
+
         .progress-fill {
             height: 100%;
             background-color: #4f46e5;
             transition: width 0.3s ease;
         }
-        #video-stream {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
     </style>
 </head>
+
 <body class="min-h-screen">
     <div class="flex flex-col lg:flex-row min-h-screen">
         <div class="w-full lg:w-3/5 p-6 overflow-auto">
@@ -208,7 +239,9 @@
                 <div class="mb-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-medium" id="current-question-number">1</span>
+                            <span
+                                class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-medium"
+                                id="current-question-number">1</span>
                             <h2 class="text-xl font-medium text-gray-900">Current Question</h2>
                         </div>
                         <div class="flex items-center gap-2 text-gray-500 text-sm">
@@ -248,16 +281,19 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <button id="previous-button" class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-button text-gray-700 hover:bg-gray-50 transition whitespace-nowrap" disabled>
+                    <button id="previous-button"
+                        class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-button text-gray-700 hover:bg-gray-50 transition whitespace-nowrap"
+                        disabled>
                         <div class="w-5 h-5 flex items-center justify-center">
                             <i class="ri-arrow-left-line"></i>
                         </div>
                         <span>Previous</span>
                     </button>
-                    <button id="next-button" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
+                    <button id="next-button"
+                        class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
                         <span>Next</span>
-              
-                              <div class="w-5 h-5 flex items-center justify-center">
+
+                        <div class="w-5 h-5 flex items-center justify-center">
                             <i class="ri-arrow-right-line"></i>
                         </div>
                     </button>
@@ -267,13 +303,20 @@
             <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-sm p-6">
                 <h3 class="text-lg font-medium text-gray-900 mb-4">Test Questions</h3>
                 <div class="grid grid-cols-5 gap-2 mb-6" id="question-nav-buttons">
-                    <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-medium">1</button>
-                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">2</button>
-                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">3</button>
-                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">4</button>
-                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">5</button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-medium">1</button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">2</button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">3</button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">4</button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">5</button>
                 </div>
-                <button id="submit-button" class="w-full py-3 bg-green-600 text-white rounded-button hover:bg-green-700 transition whitespace-nowrap" style="display: none;">
+                <button id="submit-button"
+                    class="w-full py-3 bg-green-600 text-white rounded-button hover:bg-green-700 transition whitespace-nowrap"
+                    style="display: none;">
                     Finish and Submit Test
                 </button>
             </div>
@@ -286,30 +329,34 @@
             </div>
 
             <video id="video-stream" autoplay muted></video>
-            
+
             <div class="camera-placeholder" id="camera-placeholder">
                 <div class="w-20 h-20 flex items-center justify-center mb-4">
                     <i class="ri-camera-line ri-3x"></i>
                 </div>
                 <p class="text-lg mb-2">Camera Not Connected</p>
                 <p class="text-sm text-gray-400 mb-6">Please allow camera access to proceed</p>
-                <button id="start-camera" class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
+                <button id="start-camera"
+                    class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
                     Start Camera
                 </button>
             </div>
 
             <div class="camera-controls">
-                <button class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition">
+                <button
+                    class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition">
                     <div class="w-6 h-6 flex items-center justify-center">
                         <i class="ri-mic-line"></i>
                     </div>
                 </button>
-                <button id="toggle-camera" class="w-14 h-14 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition">
+                <button id="toggle-camera"
+                    class="w-14 h-14 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition">
                     <div class="w-7 h-7 flex items-center justify-center">
                         <i class="ri-camera-off-line"></i>
                     </div>
                 </button>
-                <button class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition">
+                <button
+                    class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition">
                     <div class="w-6 h-6 flex items-center justify-center">
                         <i class="ri-camera-switch-line"></i>
                     </div>
@@ -319,64 +366,64 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-      const questions = [
-        {
-            id: 1,
-            text: "In KNN, the value of k determines:",
-            options: [
-                "The number of training samples",
-                "The number of nearest neighbors to consider",
-                "The number of features in the dataset",
-                "The number of classes in the target variable"
-            ],
-            correctAnswer: "The number of nearest neighbors to consider"
-        },
-        {
-            id: 2,
-            text: "Which distance metric is commonly used in KNN?",
-            options: [
-                "Manhattan distance",
-                "Euclidean distance",
-                "Mahalanobis distance",
-                "Pearson correlation coefficient"
-            ],
-            correctAnswer: "Euclidean distance"
-        },
-        {
-            id: 3,
-            text: "How does KNN make predictions for classification tasks?",
-            options: [
-                "By averaging the labels of the k nearest neighbors",
-                "By fitting a linear regression line to the neighbors",
-                "By calculating the centroid of the neighbors",
-                "By comparing the distances to a predefined threshold"
-            ],
-            correctAnswer: "By averaging the labels of the k nearest neighbors"
-        },
-        {
-            id: 4,
-            text: "How does the choice of k affect the bias and variance of the KNN model?",
-            options: [
-                "Increasing k increases bias and decreases variance",
-                "Increasing k decreases bias and increases variance",
-                "Increasing k has no effect on bias and variance",
-                "The relationship between k and bias/variance is not well-defined"
-            ],
-            correctAnswer: "Increasing k increases bias and decreases variance"
-        },
-        {
-            id: 5,
-            text: "What is the main drawback of the KNN algorithm?",
-            options: [
-                "It requires large amounts of computational resources",
-                "It is sensitive to outliers in the dataset",
-                "It cannot handle categorical variables",
-                "It is prone to overfitting"
-            ],
-            correctAnswer: "It requires large amounts of computational resources"
-        }
-    ];
+        document.addEventListener('DOMContentLoaded', function () {
+            const questions = [
+                {
+                    id: 1,
+                    text: "In KNN, the value of k determines:",
+                    options: [
+                        "The number of training samples",
+                        "The number of nearest neighbors to consider",
+                        "The number of features in the dataset",
+                        "The number of classes in the target variable"
+                    ],
+                    correctAnswer: "The number of nearest neighbors to consider"
+                },
+                {
+                    id: 2,
+                    text: "Which distance metric is commonly used in KNN?",
+                    options: [
+                        "Manhattan distance",
+                        "Euclidean distance",
+                        "Mahalanobis distance",
+                        "Pearson correlation coefficient"
+                    ],
+                    correctAnswer: "Euclidean distance"
+                },
+                {
+                    id: 3,
+                    text: "How does KNN make predictions for classification tasks?",
+                    options: [
+                        "By averaging the labels of the k nearest neighbors",
+                        "By fitting a linear regression line to the neighbors",
+                        "By calculating the centroid of the neighbors",
+                        "By comparing the distances to a predefined threshold"
+                    ],
+                    correctAnswer: "By averaging the labels of the k nearest neighbors"
+                },
+                {
+                    id: 4,
+                    text: "How does the choice of k affect the bias and variance of the KNN model?",
+                    options: [
+                        "Increasing k increases bias and decreases variance",
+                        "Increasing k decreases bias and increases variance",
+                        "Increasing k has no effect on bias and variance",
+                        "The relationship between k and bias/variance is not well-defined"
+                    ],
+                    correctAnswer: "Increasing k increases bias and decreases variance"
+                },
+                {
+                    id: 5,
+                    text: "What is the main drawback of the KNN algorithm?",
+                    options: [
+                        "It requires large amounts of computational resources",
+                        "It is sensitive to outliers in the dataset",
+                        "It cannot handle categorical variables",
+                        "It is prone to overfitting"
+                    ],
+                    correctAnswer: "It requires large amounts of computational resources"
+                }
+            ];
 
             let currentQuestionIndex = 0;
             let answers = {};
@@ -490,14 +537,14 @@
             function startCamera() {
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(function(mediaStream) {
+                        .then(function (mediaStream) {
                             stream = mediaStream;
                             videoElement.srcObject = mediaStream;
                             cameraActive = true;
                             cameraPlaceholder.style.display = 'none';
                             toggleCameraButton.innerHTML = '<div class="w-7 h-7 flex items-center justify-center"><i class="ri-camera-off-line"></i></div>';
                         })
-                        .catch(function(error) {
+                        .catch(function (error) {
                             console.error('Could not access camera: ', error);
                             alert('Cannot access the camera. Please check privacy settings.');
                         });
@@ -525,4 +572,5 @@
         });
     </script>
 </body>
+
 </html>
