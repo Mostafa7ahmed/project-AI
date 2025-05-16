@@ -251,14 +251,15 @@
                 <div class="flex justify-between">
                     <button id="previous-button" class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-button text-gray-700 hover:bg-gray-50 transition whitespace-nowrap" disabled>
                         <div class="w-5 h-5 flex items-center justify-center">
-                            <i class="ri-arrow-right-line"></i>
+                            <i class="ri-arrow-left-line"></i>
                         </div>
                         <span>Previous</span>
                     </button>
                     <button id="next-button" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
                         <span>Next</span>
-                        <div class="w-5 h-5 flex items-center justify-center">
-                            <i class="ri-arrow-left-line"></i>
+              
+                              <div class="w-5 h-5 flex items-center justify-center">
+                            <i class="ri-arrow-right-line"></i>
                         </div>
                     </button>
                 </div>
@@ -320,64 +321,63 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Sample questions
-            const questions = [
-                {
-                    id: 1,
-                    text: "What is the best way to improve communication skills in the workplace?",
-                    options: [
-                        "Participating in workshops specialized in communication skills",
-                        "Practicing public speaking regularly",
-                        "Active listening and asking clarifying questions",
-                        "All of the above"
-                    ],
-                    correctAnswer: "All of the above"
-                },
-                {
-                    id: 2,
-                    text: "What are the essential skills required for success in project management?",
-                    options: [
-                        "Strategic planning",
-                        "Time management",
-                        "Effective communication",
-                        "All of the above"
-                    ],
-                    correctAnswer: "All of the above"
-                },
-                {
-                    id: 3,
-                    text: "How can the effectiveness of digital marketing strategies be measured?",
-                    options: [
-                        "Website traffic",
-                        "Conversion rates",
-                        "Return on investment (ROI)",
-                        "All of the above"
-                    ],
-                    correctAnswer: "All of the above"
-                },
-                {
-                    id: 4,
-                    text: "Which tool is commonly used for team collaboration in remote work?",
-                    options: [
-                        "Microsoft Teams",
-                        "Slack",
-                        "Zoom",
-                        "All of the above"
-                    ],
-                    correctAnswer: "All of the above"
-                },
-                {
-                    id: 5,
-                    text: "What is a key benefit of agile project management?",
-                    options: [
-                        "Fixed scope",
-                        "Flexibility to adapt to changes",
-                        "Rigid timelines",
-                        "High initial planning"
-                    ],
-                    correctAnswer: "Flexibility to adapt to changes"
-                }
-            ];
+      const questions = [
+        {
+            id: 1,
+            text: "In KNN, the value of k determines:",
+            options: [
+                "The number of training samples",
+                "The number of nearest neighbors to consider",
+                "The number of features in the dataset",
+                "The number of classes in the target variable"
+            ],
+            correctAnswer: "The number of nearest neighbors to consider"
+        },
+        {
+            id: 2,
+            text: "Which distance metric is commonly used in KNN?",
+            options: [
+                "Manhattan distance",
+                "Euclidean distance",
+                "Mahalanobis distance",
+                "Pearson correlation coefficient"
+            ],
+            correctAnswer: "Euclidean distance"
+        },
+        {
+            id: 3,
+            text: "How does KNN make predictions for classification tasks?",
+            options: [
+                "By averaging the labels of the k nearest neighbors",
+                "By fitting a linear regression line to the neighbors",
+                "By calculating the centroid of the neighbors",
+                "By comparing the distances to a predefined threshold"
+            ],
+            correctAnswer: "By averaging the labels of the k nearest neighbors"
+        },
+        {
+            id: 4,
+            text: "How does the choice of k affect the bias and variance of the KNN model?",
+            options: [
+                "Increasing k increases bias and decreases variance",
+                "Increasing k decreases bias and increases variance",
+                "Increasing k has no effect on bias and variance",
+                "The relationship between k and bias/variance is not well-defined"
+            ],
+            correctAnswer: "Increasing k increases bias and decreases variance"
+        },
+        {
+            id: 5,
+            text: "What is the main drawback of the KNN algorithm?",
+            options: [
+                "It requires large amounts of computational resources",
+                "It is sensitive to outliers in the dataset",
+                "It cannot handle categorical variables",
+                "It is prone to overfitting"
+            ],
+            correctAnswer: "It requires large amounts of computational resources"
+        }
+    ];
 
             let currentQuestionIndex = 0;
             let answers = {};
