@@ -183,82 +183,105 @@
 </head>
 <body class="min-h-screen">
     <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Left Section - Questions Form -->
         <div class="w-full lg:w-3/5 p-6 overflow-auto">
             <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-sm p-6 mb-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-bold text-gray-900">Quiz Machine Learning</h1>
+                    <h1 class="text-2xl font-bold text-gray-900">Skills Assessment Survey</h1>
                     <div class="flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full">
                         <div class="w-6 h-6 flex items-center justify-center">
                             <i class="ri-question-line"></i>
                         </div>
-                        <span class="font-medium" id="total-questions">Total Questions: 5</span>
+                        <span class="font-medium">Total Questions: 5</span>
                     </div>
                 </div>
 
                 <div class="mb-6">
                     <div class="flex justify-between text-sm text-gray-600 mb-2">
                         <span>Test Progress</span>
-                        <span id="progress-text">1 of 5</span>
+                        <span>2 of 5</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
+                        <div class="progress-fill" style="width: 40%"></div>
                     </div>
                 </div>
 
                 <div class="mb-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-medium" id="current-question-number">1</span>
+                            <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-medium">2</span>
                             <h2 class="text-xl font-medium text-gray-900">Current Question</h2>
                         </div>
                         <div class="flex items-center gap-2 text-gray-500 text-sm">
                             <div class="w-5 h-5 flex items-center justify-center">
                                 <i class="ri-time-line"></i>
                             </div>
-                            <span id="time-remaining">Time Remaining: 04:30</span>
+                            <span>Time Remaining: 04:30</span>
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 p-4 rounded-lg mb-6" id="question-container">
-                        <p class="text-gray-800 text-lg mb-2" id="question-text"></p>
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                        <p class="text-gray-800 text-lg mb-2">What is the best way to improve communication skills in the workplace?</p>
                         <p class="text-gray-500 text-sm">Choose one answer</p>
                     </div>
 
-                    <div class="space-y-3 mb-8" id="options-container">
-                        <!-- Options will be dynamically inserted here -->
+                    <div class="space-y-3 mb-8">
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="1">
+                            <div>
+                                <p class="text-gray-800">Participating in workshops specialized in communication skills</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="2">
+                            <div>
+                                <p class="text-gray-800">Practicing public speaking regularly</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="3">
+                            <div>
+                                <p class="text-gray-800">Active listening and asking clarifying questions</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="4" checked>
+                            <div>
+                                <p class="text-gray-800">All of the above</p>
+                            </div>
+                        </label>
                     </div>
 
-                    <div class="bg-gray-50 p-4 rounded-lg mb-6" id="previous-question-container" style="display: none;">
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
                         <p class="text-gray-800 font-medium mb-2">Previous Question:</p>
                         <div class="mb-2">
-                            <p class="text-gray-700" id="previous-question-text"></p>
+                            <p class="text-gray-700">What are the essential skills required for success in project management?</p>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <div class="w-4 h-4 flex items-center justify-center">
                                 <i class="ri-check-line text-green-600"></i>
                             </div>
-                            <p id="previous-answer-text"></p>
+                            <p>Your Answer: Strategic planning, time management, effective communication, problem-solving</p>
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 p-4 rounded-lg mb-6" id="next-question-container" style="display: none;">
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
                         <p class="text-gray-800 font-medium mb-2">Next Question:</p>
-                        <p class="text-gray-700" id="next-question-text"></p>
+                        <p class="text-gray-700">How can the effectiveness of digital marketing strategies be measured?</p>
                     </div>
                 </div>
 
                 <div class="flex justify-between">
-                    <button id="previous-button" class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-button text-gray-700 hover:bg-gray-50 transition whitespace-nowrap" disabled>
+                    <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-button text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">
                         <div class="w-5 h-5 flex items-center justify-center">
-                            <i class="ri-arrow-left-line"></i>
+                            <i class="ri-arrow-right-line"></i>
                         </div>
                         <span>Previous</span>
                     </button>
-                    <button id="next-button" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
+                    <button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
                         <span>Next</span>
-              
-                              <div class="w-5 h-5 flex items-center justify-center">
-                            <i class="ri-arrow-right-line"></i>
+                        <div class="w-5 h-5 flex items-center justify-center">
+                            <i class="ri-arrow-left-line"></i>
                         </div>
                     </button>
                 </div>
@@ -266,14 +289,14 @@
 
             <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-sm p-6">
                 <h3 class="text-lg font-medium text-gray-900 mb-4">Test Questions</h3>
-                <div class="grid grid-cols-5 gap-2 mb-6" id="question-nav-buttons">
+                <div class="grid grid-cols-5 gap-2 mb-6">
                     <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-medium">1</button>
-                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">2</button>
+                    <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-medium">2</button>
                     <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">3</button>
                     <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">4</button>
                     <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">5</button>
                 </div>
-                <button id="submit-button" class="w-full py-3 bg-green-600 text-white rounded-button hover:bg-green-700 transition whitespace-nowrap" style="display: none;">
+                <button class="w-full py-3 bg-green-600 text-white rounded-button hover:bg-green-700 transition whitespace-nowrap">
                     Finish and Submit Test
                 </button>
             </div>
@@ -320,163 +343,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-      const questions = [
-        {
-            id: 1,
-            text: "In KNN, the value of k determines:",
-            options: [
-                "The number of training samples",
-                "The number of nearest neighbors to consider",
-                "The number of features in the dataset",
-                "The number of classes in the target variable"
-            ],
-            correctAnswer: "The number of nearest neighbors to consider"
-        },
-        {
-            id: 2,
-            text: "Which distance metric is commonly used in KNN?",
-            options: [
-                "Manhattan distance",
-                "Euclidean distance",
-                "Mahalanobis distance",
-                "Pearson correlation coefficient"
-            ],
-            correctAnswer: "Euclidean distance"
-        },
-        {
-            id: 3,
-            text: "How does KNN make predictions for classification tasks?",
-            options: [
-                "By averaging the labels of the k nearest neighbors",
-                "By fitting a linear regression line to the neighbors",
-                "By calculating the centroid of the neighbors",
-                "By comparing the distances to a predefined threshold"
-            ],
-            correctAnswer: "By averaging the labels of the k nearest neighbors"
-        },
-        {
-            id: 4,
-            text: "How does the choice of k affect the bias and variance of the KNN model?",
-            options: [
-                "Increasing k increases bias and decreases variance",
-                "Increasing k decreases bias and increases variance",
-                "Increasing k has no effect on bias and variance",
-                "The relationship between k and bias/variance is not well-defined"
-            ],
-            correctAnswer: "Increasing k increases bias and decreases variance"
-        },
-        {
-            id: 5,
-            text: "What is the main drawback of the KNN algorithm?",
-            options: [
-                "It requires large amounts of computational resources",
-                "It is sensitive to outliers in the dataset",
-                "It cannot handle categorical variables",
-                "It is prone to overfitting"
-            ],
-            correctAnswer: "It requires large amounts of computational resources"
-        }
-    ];
-
-            let currentQuestionIndex = 0;
-            let answers = {};
-
-            const totalQuestions = questions.length;
-            const questionText = document.getElementById('question-text');
-            const optionsContainer = document.getElementById('options-container');
-            const progressFill = document.getElementById('progress-fill');
-            const progressText = document.getElementById('progress-text');
-            const currentQuestionNumber = document.getElementById('current-question-number');
-            const previousQuestionContainer = document.getElementById('previous-question-container');
-            const previousQuestionText = document.getElementById('previous-question-text');
-            const previousAnswerText = document.getElementById('previous-answer-text');
-            const nextQuestionContainer = document.getElementById('next-question-container');
-            const nextQuestionText = document.getElementById('next-question-text');
-            const previousButton = document.getElementById('previous-button');
-            const nextButton = document.getElementById('next-button');
-            const submitButton = document.getElementById('submit-button');
-            const questionNavButtons = document.getElementById('question-nav-buttons').children;
-
-            function renderQuestion() {
-                const question = questions[currentQuestionIndex];
-                questionText.textContent = question.text;
-                currentQuestionNumber.textContent = currentQuestionIndex + 1;
-                progressText.textContent = `${currentQuestionIndex + 1} of ${totalQuestions}`;
-                progressFill.style.width = `${((currentQuestionIndex + 1) / totalQuestions) * 100}%`;
-
-                // Render options
-                optionsContainer.innerHTML = '';
-                question.options.forEach((option, index) => {
-                    const label = document.createElement('label');
-                    label.className = 'flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition';
-                    label.innerHTML = `
-                        <input type="radio" name="q${question.id}" value="${option}" ${answers[question.id] === option ? 'checked' : ''}>
-                        <div>
-                            <p class="text-gray-800">${option}</p>
-                        </div>
-                    `;
-                    optionsContainer.appendChild(label);
-                });
-
-                // Update previous question
-                if (currentQuestionIndex > 0) {
-                    const prevQuestion = questions[currentQuestionIndex - 1];
-                    previousQuestionContainer.style.display = 'block';
-                    previousQuestionText.textContent = prevQuestion.text;
-                    previousAnswerText.textContent = answers[prevQuestion.id] || 'Not answered';
-                } else {
-                    previousQuestionContainer.style.display = 'none';
-                }
-
-                // Update next question
-                if (currentQuestionIndex < totalQuestions - 1) {
-                    nextQuestionContainer.style.display = 'block';
-                    nextQuestionText.textContent = questions[currentQuestionIndex + 1].text;
-                } else {
-                    nextQuestionContainer.style.display = 'none';
-                }
-
-                // Update buttons
-                previousButton.disabled = currentQuestionIndex === 0;
-                nextButton.style.display = currentQuestionIndex === totalQuestions - 1 ? 'none' : 'flex';
-                submitButton.style.display = currentQuestionIndex === totalQuestions - 1 ? 'block' : 'none';
-
-                // Update navigation buttons
-                Array.from(questionNavButtons).forEach((btn, index) => {
-                    btn.className = `w-10 h-10 rounded-full ${index <= currentQuestionIndex ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'} flex items-center justify-center font-medium`;
-                });
-            }
-
-            function saveAnswer() {
-                const selectedOption = document.querySelector(`input[name="q${questions[currentQuestionIndex].id}"]:checked`);
-                if (selectedOption) {
-                    answers[questions[currentQuestionIndex].id] = selectedOption.value;
-                }
-            }
-
-            nextButton.addEventListener('click', () => {
-                saveAnswer();
-                if (currentQuestionIndex < totalQuestions - 1) {
-                    currentQuestionIndex++;
-                    renderQuestion();
-                }
-            });
-
-            previousButton.addEventListener('click', () => {
-                saveAnswer();
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    renderQuestion();
-                }
-            });
-
-            submitButton.addEventListener('click', () => {
-                saveAnswer();
-                alert('Test submitted! Your answers have been recorded.');
-                console.log('Submitted answers:', answers);
-            });
-
-            // Camera functionality
             const videoElement = document.getElementById('video-stream');
             const startCameraButton = document.getElementById('start-camera');
             const toggleCameraButton = document.getElementById('toggle-camera');
@@ -520,8 +386,11 @@
                 }
             }
 
-            // Initialize
-            renderQuestion();
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const totalQuestions = 5;
+            const currentQuestion = 2;
+            progressFill.style.width = `${(currentQuestion / totalQuestions) * 100}%`;
         });
     </script>
 </body>
