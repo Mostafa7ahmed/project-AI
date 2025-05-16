@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج الأسئلة والإجابات</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4f46e5',secondary:'#8b5cf6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+        }
+        input[type="radio"] {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            position: relative;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        input[type="radio"]:checked {
+            border-color: #4f46e5;
+        }
+        input[type="radio"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #4f46e5;
+            border-radius: 50%;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            position: relative;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        input[type="checkbox"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 0.25rem;
+            left: 0.4rem;
+            width: 0.4rem;
+            height: 0.7rem;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 3rem;
+            height: 1.5rem;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 1.1rem;
+            width: 1.1rem;
+            right: 0.2rem;
+            bottom: 0.2rem;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4f46e5;
+        }
+        input:checked + .slider:before {
+            transform: translateX(-1.5rem);
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .camera-container {
+            position: relative;
+            overflow: hidden;
+            background-color: #111827;
+        }
+        .camera-placeholder {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #9ca3af;
+        }
+        .camera-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .camera-status {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+        }
+        .progress-bar {
+            height: 0.5rem;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #4f46e5;
+            transition: width 0.3s ease;
+        }
+        #video-stream {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- القسم الأيسر - نموذج الأسئلة -->
+        <div class="w-full lg:w-3/5 p-6 overflow-auto">
+            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-sm p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900">استبيان تقييم المهارات</h1>
+                    <div class="flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full">
+                        <div class="w-6 h-6 flex items-center justify-center">
+                            <i class="ri-question-line"></i>
+                        </div>
+                        <span class="font-medium">إجمالي الأسئلة: 5</span>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between text-sm text-gray-600 mb-2">
+                        <span>تقدم الاختبار</span>
+                        <span>2 من 5</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-medium">2</span>
+                            <h2 class="text-xl font-medium text-gray-900">السؤال الحالي</h2>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-500 text-sm">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span>الوقت المتبقي: 04:30</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                        <p class="text-gray-800 text-lg mb-2">ما هي أفضل طريقة لتحسين مهارات التواصل في بيئة العمل؟</p>
+                        <p class="text-gray-500 text-sm">اختر إجابة واحدة</p>
+                    </div>
+
+                    <div class="space-y-3 mb-8">
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="1">
+                            <div>
+                                <p class="text-gray-800">المشاركة في ورش عمل متخصصة في مهارات التواصل</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="2">
+                            <div>
+                                <p class="text-gray-800">ممارسة التحدث أمام الجمهور بشكل منتظم</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="3">
+                            <div>
+                                <p class="text-gray-800">الاستماع بفعالية وطرح أسئلة توضيحية</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="4" checked>
+                            <div>
+                                <p class="text-gray-800">جميع ما سبق</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                        <p class="text-gray-800 font-medium mb-2">السؤال السابق:</p>
+                        <div class="mb-2">
+                            <p class="text-gray-700">ما هي المهارات الأساسية المطلوبة للنجاح في مجال إدارة المشاريع؟</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <div class="w-4 h-4 flex items-center justify-center">
+                                <i class="ri-check-line text-green-600"></i>
+                            </div>
+                            <p>إجابتك: التخطيط الاستراتيجي، إدارة الوقت، التواصل الفعال، حل المشكلات</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                        <p class="text-gray-800 font-medium mb-2">السؤال التالي:</p>
+                        <p class="text-gray-700">كيف يمكن قياس فعالية استراتيجيات التسويق الرقمي؟</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-button text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">
+                        <div class="w-5 h-5 flex items-center justify-center">
+                            <i class="ri-arrow-right-line"></i>
+                        </div>
+                        <span>السابق</span>
+                    </button>
+                    <button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
+                        <span>التالي</span>
+                        <div class="w-5 h-5 flex items-center justify-center">
+                            <i class="ri-arrow-left-line"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">أسئلة الاختبار</h3>
+                <div class="grid grid-cols-5 gap-2 mb-6">
+                    <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-medium">1</button>
+                    <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-medium">2</button>
+                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">3</button>
+                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">4</button>
+                    <button class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center font-medium">5</button>
+                </div>
+                <button class="w-full py-3 bg-green-600 text-white rounded-button hover:bg-green-700 transition whitespace-nowrap">
+                    إنهاء وإرسال الاختبار
+                </button>
+            </div>
+        </div>
+
+        <!-- القسم الأيمن - عرض الكاميرا -->
+        <div class="w-full lg:w-2/5 bg-gray-900 camera-container">
+            <div class="camera-status flex items-center gap-2 bg-gray-800/80 px-3 py-1 rounded-full text-white">
+                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-sm">الكاميرا نشطة</span>
+            </div>
+
+            <video id="video-stream" autoplay muted></video>
+            
+            <div class="camera-placeholder" id="camera-placeholder">
+                <div class="w-20 h-20 flex items-center justify-center mb-4">
+                    <i class="ri-camera-line ri-3x"></i>
+                </div>
+                <p class="text-lg mb-2">الكاميرا غير متصلة</p>
+                <p class="text-sm text-gray-400 mb-6">يرجى السماح بالوصول إلى الكاميرا للمتابعة</p>
+                <button id="start-camera" class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition whitespace-nowrap">
+                    تشغيل الكاميرا
+                </button>
+            </div>
+
+            <div class="camera-controls">
+                <button class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-mic-line"></i>
+                    </div>
+                </button>
+                <button id="toggle-camera" class="w-14 h-14 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition">
+                    <div class="w-7 h-7 flex items-center justify-center">
+                        <i class="ri-camera-off-line"></i>
+                    </div>
+                </button>
+                <button class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-camera-switch-line"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoElement = document.getElementById('video-stream');
+            const startCameraButton = document.getElementById('start-camera');
+            const toggleCameraButton = document.getElementById('toggle-camera');
+            const cameraPlaceholder = document.getElementById('camera-placeholder');
+            let stream = null;
+            let cameraActive = false;
+
+            startCameraButton.addEventListener('click', startCamera);
+            toggleCameraButton.addEventListener('click', toggleCamera);
+
+            function startCamera() {
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(function(mediaStream) {
+                            stream = mediaStream;
+                            videoElement.srcObject = mediaStream;
+                            cameraActive = true;
+                            cameraPlaceholder.style.display = 'none';
+                            toggleCameraButton.innerHTML = '<div class="w-7 h-7 flex items-center justify-center"><i class="ri-camera-off-line"></i></div>';
+                        })
+                        .catch(function(error) {
+                            console.error('Could not access camera: ', error);
+                            alert('لا يمكن الوصول إلى الكاميرا. يرجى التحقق من إعدادات الخصوصية.');
+                        });
+                } else {
+                    alert('متصفحك لا يدعم الوصول إلى الكاميرا.');
+                }
+            }
+
+            function toggleCamera() {
+                if (cameraActive) {
+                    if (stream) {
+                        stream.getTracks().forEach(track => track.stop());
+                    }
+                    videoElement.srcObject = null;
+                    cameraActive = false;
+                    cameraPlaceholder.style.display = 'flex';
+                    toggleCameraButton.innerHTML = '<div class="w-7 h-7 flex items-center justify-center"><i class="ri-camera-line"></i></div>';
+                } else {
+                    startCamera();
+                }
+            }
+
+            // تحديث شريط التقدم
+            const progressFill = document.querySelector('.progress-fill');
+            const totalQuestions = 5;
+            const currentQuestion = 2;
+            progressFill.style.width = `${(currentQuestion / totalQuestions) * 100}%`;
+        });
+    </script>
+</body>
+</html>
